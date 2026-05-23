@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podcasting for Beginners - Launch Your First Show Today</title>
+  <style>
+    :root {
+      --accent: #FF6B35;
+      --accent-dark: #E85A24;
+      --ink: #1A1A2E;
+      --muted: #6B6B7B;
+      --paper: #FAFAF9;
+      --rule: #E8E4DD;
+      --highlight: #FFF4E6;
+      --dark-bg: #1A1A2E;
+      --dark-bg-2: #2D2438;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: var(--muted);
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #fff !important;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent-dark);
+      color: #fff !important;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-bg-2) 50%, var(--dark-bg) 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 80%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(255,107,53,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 10%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(circle, rgba(255,107,53,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 1100px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,107,53,0.15);
+      color: var(--accent);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(18px, 2.5vw, 22px);
+      color: rgba(255,255,255,0.8);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 18px 40px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255,107,53,0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      padding: 18px 40px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      border: 2px solid rgba(255,255,255,0.2);
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat .number {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .hero-stat .label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 5px;
+    }
+
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 60px;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .trust-badge svg {
+      width: 20px;
+      height: 20px;
+      color: var(--accent);
+    }
+
+    /* Problem Section */
+    .problem {
+      padding: 100px 5%;
+      background: #fff;
+    }
+
+    .section-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .problem-grid {
+      max-width: 1100px;
+      margin: 50px auto 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .problem-card {
+      background: var(--paper);
+      border-radius: 16px;
+      padding: 35px;
+      border: 1px solid var(--rule);
+      transition: all 0.3s;
+    }
+
+    .problem-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    .problem-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #ffebee, #ffcdd2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: #c62828;
+      font-size: 28px;
+    }
+
+    .problem-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .problem-card p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* What's Inside */
+    .whats-inside {
+      padding: 100px 5%;
+      background: var(--highlight);
+    }
+
+    .whats-inside .section-title {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 20px;
+    }
+
+    .whats-inside .section-subtitle {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 60px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .features-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 35px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+      transition: all 0.3s;
+      border: 1px solid transparent;
+    }
+
+    .feature-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 24px;
+    }
+
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .bonus-bar {
+      max-width: 1200px;
+      margin: 60px auto 0;
+      background: var(--dark-bg);
+      color: #fff;
+      padding: 30px 40px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .bonus-bar h4 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .bonus-bar p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .bonus-items {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .bonus-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .bonus-item svg {
+      color: var(--accent);
+    }
+
+    /* Pricing Section */
+    .pricing {
+      padding: 100px 5%;
+      background: #fff;
+    }
+
+    .pricing .section-title {
+      text-align: center;
+    }
+
+    .pricing .section-subtitle {
+      text-align: center;
+      max-width: 500px;
+      margin: 0 auto 60px;
+      color: var(--muted);
+    }
+
+    .pricing-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+    }
+
+    .price-card {
+      background: var(--paper);
+      border-radius: 24px;
+      padding: 50px 40px;
+      border: 2px solid var(--rule);
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .price-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .price-card.featured {
+      background: var(--dark-bg);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 20px 60px rgba(255,107,53,0.2);
+    }
+
+    .price-card.featured .price-label {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .price-card.featured .price {
+      color: #fff;
+    }
+
+    .price-card.featured .price-features li {
+      color: rgba(255,255,255,0.85);
+    }
+
+    .price-card.featured .check-icon {
+      color: var(--accent);
+    }
+
+    .price-label {
+      display: inline-block;
+      background: var(--rule);
+      color: var(--ink);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .price-name {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .price-description {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    .price-card.featured .price-description {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .price-amount {
+      margin-bottom: 30px;
+    }
+
+    .price {
+      font-size: 56px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .price-card.featured .price {
+      color: #fff;
+    }
+
+    .price-period {
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .price-card.featured .price-period {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .price-cta {
+      display: block;
+      text-align: center;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      transition: all 0.3s;
+    }
+
+    .price-cta.primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .price-cta.primary:hover {
+      background: var(--accent-dark);
+    }
+
+    .price-cta.secondary {
+      background: rgba(255,107,53,0.1);
+      color: var(--accent);
+    }
+
+    .price-cta.secondary:hover {
+      background: rgba(255,107,53,0.2);
+    }
+
+    .price-features {
+      list-style: none;
+    }
+
+    .price-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      font-size: 15px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .price-card.featured .price-features li {
+      border-bottom-color: rgba(255,255,255,0.1);
+    }
+
+    .price-features li:last-child {
+      border-bottom: none;
+    }
+
+    .check-icon {
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .guarantee-badge {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      background: var(--highlight);
+      border-radius: 12px;
+    }
+
+    .guarantee-badge svg {
+      width: 40px;
+      height: 40px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .guarantee-badge h4 {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .guarantee-badge p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* FAQ Section */
+    .faq {
+      padding: 100px 5%;
+      background: var(--paper);
+    }
+
+    .faq .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: #fff;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+    }
+
+    .faq-question {
+      padding: 24px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .faq-question:hover {
+      background: var(--highlight);
+    }
+
+    .faq-question h4 {
+      font-size: 17px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .faq-toggle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--highlight);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(180deg);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+    }
+
+    .faq-answer-content {
+      padding: 0 30px 24px;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      padding: 100px 5%;
+      background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-bg-2) 50%, var(--dark-bg) 100%);
+      color: #fff;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 70%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(255,107,53,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .final-cta-content {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .final-cta p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 40px;
+    }
+
+    .instant-access {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      margin-top: 30px;
+    }
+
+    .instant-access svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--dark-bg);
+      color: rgba(255,255,255,0.6);
+      padding: 40px 5%;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: rgba(255,255,255,0.8);
+      transition: color 0.3s;
+    }
+
+    .footer a:hover {
+      color: var(--accent);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 100px 5% 60px;
+      }
+
+      .hero-stats {
+        gap: 30px;
+      }
+
+      .problem-grid,
+      .features-grid,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bonus-bar {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .bonus-items {
+        justify-content: center;
+      }
+
+      .price-card.featured {
+        order: -1;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fadeInUp {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-logo">Podcast<span>Pro</span></div>
+    <div class="nav-links">
+      <a href="#problem">Why This Guide</a>
+      <a href="#features">What's Inside</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#pricing" class="nav-cta">Get the Guide</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Starter Edition 2026</div>
+      <h1>Launch Your <span>First Podcast</span> in 30 Days</h1>
+      <p class="hero-subtitle">The complete roadmap from zero to publishing your first episode. No technical experience required—just your voice and this step-by-step guide.</p>
+
+      <div class="hero-cta-group">
+        <a href="#pricing" class="btn-primary">
+          Get the Starter Guide
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#features" class="btn-secondary">See What's Inside</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="number">12</div>
+          <div class="label">Chapters</div>
+        </div>
+        <div class="hero-stat">
+          <div class="number">50+</div>
+          <div class="label">Action Steps</div>
+        </div>
+        <div class="hero-stat">
+          <div class="number">27</div>
+          <div class="label">Pages</div>
+        </div>
+      </div>
+
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          Instant Digital Download
+        </div>
+        <div class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          Secure Payment
+        </div>
+        <div class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          30-Day Guarantee
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="problem" id="problem">
+    <div class="section-label">The Challenge</div>
+    <h2 class="section-title">Thinking About Starting a Podcast<br>But Don't Know Where to Begin?</h2>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">?</div>
+        <h3>"I Have No Idea What to Talk About"</h3>
+        <p>You're not sure if your topic is interesting enough or if there's an audience waiting. You worry about running out of ideas after just a few episodes.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">$</div>
+        <h3>"Equipment Seems So Expensive"</h3>
+        <p>You see professional setups costing hundreds or thousands of dollars and assume you need to spend big before you can even start recording.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">T</div>
+        <h3>"Technical Stuff Sounds Overwhelming"</h3>
+        <p>Audio editing, RSS feeds, hosting platforms, podcast directories... the technical side of podcasting feels like learning a new language.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">!</div>
+        <h3>"What If Nobody Listens?"</h3>
+        <p>You worry that you'll put in all this effort and your podcast will be ignored. The fear of failure is keeping you from ever getting started.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Inside -->
+  <section class="whats-inside" id="features">
+    <div class="section-label">What's Inside</div>
+    <h2 class="section-title">Everything You Need to Launch Successfully</h2>
+    <p class="section-subtitle">A comprehensive guide that takes you from "I want to start a podcast" to "My first episode is live."</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">1</div>
+        <h3>Finding Your Podcast Concept</h3>
+        <p>Discover how to choose a topic that excites you, identify your target audience, and create a unique angle that sets your show apart.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">2</div>
+        <h3>Equipment Without Overwhelm</h3>
+        <p>Get clear recommendations for every budget—from beginner USB microphones to intermediate XLR setups. Know exactly what to buy and what to skip.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">3</div>
+        <h3>Recording Setup Secrets</h3>
+        <p>Learn professional techniques for creating great sound in any environment, even a closet. No expensive studio required.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">4</div>
+        <h3>Recording Mastery</h3>
+        <p>Master microphone technique, voice delivery, and remote interviewing. Stop worrying about "ums" and learn how to speak naturally.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">5</div>
+        <h3>Editing Fundamentals</h3>
+        <p>Follow a step-by-step workflow that turns raw recordings into polished episodes. Includes time-saving tips and common mistakes to avoid.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">6</div>
+        <h3>Publishing & Distribution</h3>
+        <p>Get your podcast into Apple Podcasts, Spotify, and all major platforms. Understand RSS feeds and hosting without the confusion.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">7</div>
+        <h3>Audience Growth Strategy</h3>
+        <p>Learn proven methods to attract and retain listeners. From guest appearances to social media promotion, grow your audience organically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">8</div>
+        <h3>Monetization Basics</h3>
+        <p>Understand realistic revenue expectations and multiple income streams—from sponsorships to premium content.</p>
+      </div>
+    </div>
+
+    <div class="bonus-bar">
+      <div>
+        <h4>Plus Bonuses</h4>
+        <p>Everything you need to get started immediately</p>
+      </div>
+      <div class="bonus-items">
+        <div class="bonus-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          Launch Checklist
+        </div>
+        <div class="bonus-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          Equipment Guide
+        </div>
+        <div class="bonus-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          Resource List
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Start Your Podcasting Journey Today</h2>
+    <p class="section-subtitle">One simple investment for everything you need</p>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-label">Starter</div>
+        <div class="price-name">Podcast Starter Kit</div>
+        <p class="price-description">The essential guide to launching your first podcast</p>
+
+        <div class="price-amount">
+          <div class="price">$19</div>
+          <div class="price-period">one-time payment</div>
+        </div>
+
+        <a href="#" class="price-cta primary">Get the Guide</a>
+
+        <ul class="price-features">
+          <li>
+            <span class="check-icon">+</span>
+            Complete 27-page Guide (PDF)
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            12 Comprehensive Chapters
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            50+ Actionable Steps
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            Equipment Recommendations
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            Launch Checklist
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            Resource Links & Tools
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            Lifetime Updates
+          </li>
+        </ul>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-label">Recommended</div>
+        <div class="price-name">Premium Bundle</div>
+        <p class="price-description">Everything in Starter plus exclusive resources</p>
+
+        <div class="price-amount">
+          <div class="price">$39</div>
+          <div class="price-period">one-time payment</div>
+        </div>
+
+        <a href="#" class="price-cta secondary">Get Premium Bundle</a>
+
+        <ul class="price-features">
+          <li>
+            <span class="check-icon">+</span>
+            Complete 27-page Guide (PDF)
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            12 Comprehensive Chapters
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            50+ Actionable Steps
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            Equipment Recommendations
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            Launch Checklist
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            Resource Links & Tools
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            Lifetime Updates
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            Bonus: Episode Template
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            Bonus: Show Notes Template
+          </li>
+          <li>
+            <span class="check-icon">+</span>
+            Bonus: Guest Outreach Email Templates
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="guarantee-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      <h4>30-Day Money-Back Guarantee</h4>
+      <p>If this guide doesn't help you launch your podcast, we'll refund your payment in full. No questions asked.</p>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">Questions? We've Got Answers</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-question">
+          <h4>Do I need any prior experience?</h4>
+          <div class="faq-toggle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Not at all. This guide is designed specifically for complete beginners. We explain everything from what a podcast is to how to record your first episode—no prior experience with audio, editing, or publishing required.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h4>How much equipment do I need to buy?</h4>
+          <div class="faq-toggle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            You can start with as little as a $75 USB microphone and headphones you probably already own. The guide includes specific product recommendations for every budget level, from beginner to intermediate.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h4>What format is the guide in?</h4>
+          <div class="faq-toggle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            The main guide is a beautifully designed PDF that you can read on any device, print at home, or keep on your computer for reference. Premium Bundle includes additional downloadable templates in editable formats.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h4>How long until I can publish my first episode?</h4>
+          <div class="faq-toggle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Most people can go from zero to published episode within 2-4 weeks, depending on how quickly they work through the material and prepare their content. The guide is structured so you can move at your own pace.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h4>What if I'm not satisfied?</h4>
+          <div class="faq-toggle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            We offer a 30-day money-back guarantee. If this guide doesn't help you launch your podcast, contact us within 30 days for a full refund—no questions asked, no hard feelings.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h4>Will I make money from my podcast?</h4>
+          <div class="faq-toggle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            We include a chapter on monetization that sets realistic expectations. Most podcasts don't make significant revenue for 1-2 years. This guide focuses on helping you launch and build an audience first—that's the foundation for any monetization strategy.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <div class="final-cta-content">
+      <h2>Ready to Share Your Voice With the World?</h2>
+      <p>Your podcast journey starts with a single step. Get the guide, follow the process, and launch your first episode. The only thing standing between you and your podcast is taking action.</p>
+
+      <a href="#pricing" class="btn-primary" style="display: inline-block;">
+        Start Your Podcasting Journey
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+
+      <div class="instant-access">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        Instant digital download after purchase
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 Podcast Starter Guide. All rights reserved. | <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a> | <a href="#">Contact</a></p>
+  </footer>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // FAQ accordion functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.parentElement;
+        const wasActive = item.classList.contains('active');
+
+        // Close all items
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('active');
+        });
+
+        // Toggle clicked item
+        if (!wasActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.boxShadow = '0 4px 30px rgba(0,0,0,0.1)';
+      } else {
+        navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
+      }
+    });
+
+    // Scroll animations for elements
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.problem-card, .feature-card, .price-card').forEach((el, index) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

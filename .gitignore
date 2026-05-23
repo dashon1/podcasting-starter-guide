@@ -1,0 +1,49 @@
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-*
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+ENV/
+
+# Logs
+*.log
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# PDF temp files (keep the actual PDFs)
+*.pdf.bak
+*.pdf.temp
+
+# Downloaded packages
+*.zip
+packages/
+
+# Credentials (never commit these)
+.env
+.env.local
+*.pem
+*.key
+credentials.json

@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Podcasting for Beginners - Launching Your First Show</title>
+  <style>
+    :root {
+      --accent: #FF6B35;
+      --accent-dark: #E85A24;
+      --ink: #1A1A2E;
+      --muted: #6B6B7B;
+      --paper: #FAFAF9;
+      --rule: #E8E4DD;
+      --highlight: #FFF4E6;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 14mm 12mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--paper);
+      margin: 0;
+      padding: 0;
+    }
+
+    @media screen {
+      html { background: #d0d0d0; }
+      body { margin: 0; padding: 20px 0; }
+      body > section {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto 20px;
+        background: #fff;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+    }
+
+    /* Cover Page */
+    .cover {
+      min-height: 268mm;
+      background: linear-gradient(135deg, #1A1A2E 0%, #2D2438 50%, #1A1A2E 100%);
+      color: #fff;
+      padding: 40mm 20mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 80%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(255,107,53,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: 10%;
+      left: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(circle, rgba(255,107,53,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .cover-tag {
+      font-size: 9pt;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .cover h1 {
+      font-size: 36pt;
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 15mm 0 8mm 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover h1 span {
+      color: var(--accent);
+    }
+
+    .cover .subtitle {
+      font-size: 14pt;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+      max-width: 160mm;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: auto;
+      padding-top: 15mm;
+      border-top: 0.5pt solid rgba(255,255,255,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    .meta-stats {
+      display: flex;
+      gap: 25mm;
+    }
+
+    .meta-stat {
+      text-align: center;
+    }
+
+    .meta-stat .num {
+      font-size: 28pt;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .meta-stat .lbl {
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.6);
+      margin-top: 2mm;
+    }
+
+    .cover-info {
+      font-size: 9pt;
+      color: rgba(255,255,255,0.5);
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    /* Page styling */
+    .page {
+      page-break-after: always;
+      padding: 14mm 0;
+      position: relative;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    /* Running header */
+    .running-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 7mm;
+      border-bottom: 0.5pt solid var(--rule);
+      font-size: 8.5pt;
+      color: var(--muted);
+      line-height: 7mm;
+      padding: 0 12mm;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .running-header .left {
+      color: var(--muted);
+    }
+
+    .running-header .right {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* Running footer */
+    .running-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 8mm;
+      border-top: 0.5pt solid var(--rule);
+      font-size: 8.5pt;
+      color: var(--muted);
+      line-height: 8mm;
+      text-align: center;
+    }
+
+    /* Section headers */
+    .section-header {
+      margin-bottom: 12mm;
+    }
+
+    .section-num {
+      font-size: 9pt;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4mm;
+    }
+
+    .section-title {
+      font-size: 22pt;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--ink);
+      margin: 0 0 6mm 0;
+    }
+
+    .section-line {
+      width: 30mm;
+      height: 3pt;
+      background: var(--accent);
+      margin-top: 6mm;
+    }
+
+    /* Lead paragraph */
+    .lead {
+      font-size: 12pt;
+      line-height: 1.6;
+      color: var(--ink);
+      margin-bottom: 10mm;
+    }
+
+    /* Body content */
+    h3 {
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 10mm 0 5mm 0;
+      page-break-after: avoid;
+    }
+
+    h4 {
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 8mm 0 4mm 0;
+      page-break-after: avoid;
+    }
+
+    p {
+      margin: 0 0 5mm 0;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin: 0 0 6mm 0;
+      padding-left: 6mm;
+    }
+
+    li {
+      margin-bottom: 3mm;
+    }
+
+    /* Callout boxes */
+    .callout {
+      background: var(--highlight);
+      border-left: 3mm solid var(--accent);
+      padding: 6mm 8mm;
+      margin: 8mm 0;
+      page-break-inside: avoid;
+    }
+
+    .callout-title {
+      font-size: 9pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 10pt;
+    }
+
+    /* Checklist */
+    .checklist {
+      background: #fff;
+      border: 0.5pt solid var(--rule);
+      border-radius: 8px;
+      padding: 8mm;
+      margin: 8mm 0;
+    }
+
+    .checklist-title {
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 5mm;
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+    }
+
+    .checklist-title::before {
+      content: '';
+      display: inline-block;
+      width: 6mm;
+      height: 6mm;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .checklist ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .checklist li {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--rule);
+      display: flex;
+      align-items: flex-start;
+      gap: 4mm;
+    }
+
+    .checklist li:last-child {
+      border-bottom: none;
+    }
+
+    .checkbox {
+      width: 5mm;
+      height: 5mm;
+      border: 1.5pt solid var(--muted);
+      border-radius: 1.5pt;
+      flex-shrink: 0;
+      margin-top: 1mm;
+    }
+
+    /* Two-column layout */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10mm;
+      margin: 8mm 0;
+    }
+
+    /* Info cards */
+    .card {
+      background: #fff;
+      border: 0.5pt solid var(--rule);
+      border-radius: 8px;
+      padding: 6mm;
+      page-break-inside: avoid;
+    }
+
+    .card-icon {
+      width: 10mm;
+      height: 10mm;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4mm;
+      font-size: 12pt;
+      color: #fff;
+    }
+
+    .card-title {
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 3mm;
+    }
+
+    .card p {
+      font-size: 9.5pt;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    /* Pricing cards */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8mm;
+      margin: 10mm 0;
+    }
+
+    .price-card {
+      background: #fff;
+      border: 1pt solid var(--rule);
+      border-radius: 12px;
+      padding: 8mm;
+      text-align: center;
+      page-break-inside: avoid;
+    }
+
+    .price-card.featured {
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(255,107,53,0.15);
+    }
+
+    .price-tier {
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 4mm;
+    }
+
+    .price-card.featured .price-tier {
+      color: var(--accent-dark);
+    }
+
+    .price {
+      font-size: 28pt;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 6mm;
+    }
+
+    .price-card.featured .price {
+      color: var(--accent-dark);
+    }
+
+    .price-includes {
+      font-size: 9pt;
+      color: var(--muted);
+      margin-bottom: 6mm;
+    }
+
+    .price-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+    }
+
+    .price-features li {
+      padding: 2mm 0;
+      font-size: 9.5pt;
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+    }
+
+    .check-icon {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Table of Contents */
+    .toc {
+      padding: 0 12mm;
+    }
+
+    .toc-title {
+      font-size: 14pt;
+      font-weight: 700;
+      margin-bottom: 10mm;
+      color: var(--ink);
+    }
+
+    .toc-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4mm 0;
+      border-bottom: 0.5pt solid var(--rule);
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .toc-row:hover {
+      color: var(--accent);
+    }
+
+    .toc-row span:first-child {
+      font-size: 10.5pt;
+    }
+
+    .toc-row .page-ref {
+      font-size: 9pt;
+      color: var(--muted);
+    }
+
+    /* Resource list */
+    .resource-list {
+      margin: 8mm 0;
+    }
+
+    .resource-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 5mm;
+      padding: 5mm 0;
+      border-bottom: 0.5pt solid var(--rule);
+    }
+
+    .resource-num {
+      width: 8mm;
+      height: 8mm;
+      background: var(--accent);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 10pt;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .resource-content h4 {
+      margin: 0 0 2mm 0;
+      font-size: 10.5pt;
+    }
+
+    .resource-content p {
+      margin: 0;
+      font-size: 9pt;
+      color: var(--muted);
+    }
+
+    /* Quote block */
+    .quote-block {
+      background: linear-gradient(135deg, #1A1A2E 0%, #2D2438 100%);
+      color: #fff;
+      padding: 10mm;
+      margin: 10mm 0;
+      border-radius: 8px;
+      page-break-inside: avoid;
+    }
+
+    .quote-text {
+      font-size: 13pt;
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 5mm;
+    }
+
+    .quote-author {
+      font-size: 9pt;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Key takeaway */
+    .key-takeaway {
+      background: var(--accent);
+      color: #fff;
+      padding: 8mm;
+      margin: 10mm 0;
+      border-radius: 8px;
+      page-break-inside: avoid;
+    }
+
+    .key-takeaway-title {
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      margin-bottom: 3mm;
+      opacity: 0.9;
+    }
+
+    .key-takeaway p {
+      margin: 0;
+      font-size: 11pt;
+      font-weight: 500;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      background: linear-gradient(135deg, #1A1A2E 0%, #2D2438 100%);
+      color: #fff;
+      padding: 12mm;
+      margin: 10mm 0;
+      border-radius: 12px;
+      text-align: center;
+      page-break-inside: avoid;
+    }
+
+    .final-cta h2 {
+      font-size: 20pt;
+      font-weight: 700;
+      margin: 0 0 5mm 0;
+    }
+
+    .final-cta p {
+      font-size: 11pt;
+      opacity: 0.85;
+      margin: 0 0 8mm 0;
+      text-align: center;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 5mm 10mm;
+      border-radius: 8px;
+      font-size: 11pt;
+      font-weight: 600;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Cover Page -->
+<section class="cover" id="cover">
+  <div>
+    <span class="cover-tag">Digital Guide</span>
+    <h1>Podcasting for <span>Beginners</span></h1>
+    <p class="subtitle">Your complete roadmap from zero to launching a podcast that connects with your audience and builds momentum.</p>
+  </div>
+  <div class="cover-meta">
+    <div class="meta-stats">
+      <div class="meta-stat">
+        <div class="num">12</div>
+        <div class="lbl">Chapters</div>
+      </div>
+      <div class="meta-stat">
+        <div class="num">50+</div>
+        <div class="lbl">Action Steps</div>
+      </div>
+      <div class="meta-stat">
+        <div class="num">∞</div>
+        <div class="lbl">Potential</div>
+      </div>
+    </div>
+    <div class="cover-info">
+      STARTER EDITION<br>
+      Version 1.0<br>
+      2026
+    </div>
+  </div>
+</section>
+
+<!-- Table of Contents -->
+<section class="page" id="toc">
+  <div class="running-header">
+    <span class="left">Podcasting for Beginners</span>
+    <span class="right">Contents</span>
+  </div>
+  <div class="toc">
+    <h2 class="toc-title">Table of Contents</h2>
+    <a href="#intro" class="toc-row">
+      <span>1. Introduction: Your Podcasting Journey</span>
+      <span class="page-ref">3</span>
+    </a>
+    <a href="#why-podcast" class="toc-row">
+      <span>2. Why Start a Podcast?</span>
+      <span class="page-ref">4</span>
+    </a>
+    <a href="#concept" class="toc-row">
+      <span>3. Finding Your Podcast Concept</span>
+      <span class="page-ref">5</span>
+    </a>
+    <a href="#equipment" class="toc-row">
+      <span>4. Essential Equipment</span>
+      <span class="page-ref">7</span>
+    </a>
+    <a href="#setup" class="toc-row">
+      <span>5. Recording Setup & Environment</span>
+      <span class="page-ref">9</span>
+    </a>
+    <a href="#recording" class="toc-row">
+      <span>6. Recording Techniques</span>
+      <span class="page-ref">11</span>
+    </a>
+    <a href="#editing" class="toc-row">
+      <span>7. Editing Fundamentals</span>
+      <span class="page-ref">13</span>
+    </a>
+    <a href="#publishing" class="toc-row">
+      <span>8. Publishing & Distribution</span>
+      <span class="page-ref">15</span>
+    </a>
+    <a href="#growth" class="toc-row">
+      <span>9. Growing Your Audience</span>
+      <span class="page-ref">17</span>
+    </a>
+    <a href="#monetization" class="toc-row">
+      <span>10. Monetization Basics</span>
+      <span class="page-ref">19</span>
+    </a>
+    <a href="#checklist" class="toc-row">
+      <span>11. Launch Checklist</span>
+      <span class="page-ref">20</span>
+    </a>
+    <a href="#resources" class="toc-row">
+      <span>12. Resources & Next Steps</span>
+      <span class="page-ref">22</span>
+    </a>
+  </div>
+  <div class="running-footer">2</div>
+</section>
+
+<!-- Chapter 1: Introduction -->
+<section class="page" id="intro">
+  <div class="running-header">
+    <span class="left">Podcasting for Beginners</span>
+    <span class="right">Introduction</span>
+  </div>
+  <div style="padding: 10mm 12mm 0 12mm;">
+    <div class="section-header">
+      <span class="section-num">Chapter 01</span>
+      <h2 class="section-title">Introduction: Your Podcasting Journey</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="lead">You've decided to start a podcast. Maybe you've been listening to podcasts and thought, "I could do this too." Or perhaps you have knowledge and stories to share and want to build an audience around your expertise. Either way, you're in the right place.</p>
+
+    <p>This guide is designed for complete beginners. No prior experience with audio recording, editing, or publishing is required. We'll walk you through everything from finding your podcast concept to hitting the publish button on your first episode.</p>
+
+    <h3>What Makes a Great Podcast?</h3>
+    <p>The best podcasts share a few key characteristics. They're consistent, delivering episodes on a regular schedule that listeners can count on. They're authentic, featuring hosts who genuinely care about their topics and connect with their audience. And they're valuable, offering entertainment, education, or insight that keeps people coming back.</p>
+
+    <div class="quote-block">
+      <p class="quote-text">"The best podcasters aren't the ones with the most expensive equipment. They're the ones who show up consistently and genuinely care about their audience."</p>
+      <p class="quote-author">—Pat Flynn, Smart Passive Income</p>
+    </div>
+
+    <h3>What You'll Learn</h3>
+    <p>By the end of this guide, you will understand how to:</p>
+    <ul>
+      <li>Define your podcast's purpose and target audience</li>
+      <li>Choose the right equipment for your budget</li>
+      <li>Set up an optimal recording environment</li>
+      <li>Record high-quality audio with professional techniques</li>
+      <li>Edit your episodes efficiently and effectively</li>
+      <li>Distribute your podcast to major platforms</li>
+      <li>Grow your audience organically</li>
+      <li>Explore monetization opportunities</li>
+    </ul>
+
+    <div class="key-takeaway">
+      <div class="key-takeaway-title">Key Takeaway</div>
+      <p>Starting a podcast is a journey, not a destination. Your first episode won't be perfect, and that's okay. What matters is that you begin and keep improving with each episode.</p>
+    </div>
+  </div>
+  <div class="running-footer">3</div>
+</section>
+
+<!-- Chapter 2: Why Start a Podcast -->
+<section class="page" id="why-podcast">
+  <div class="running-header">
+    <span class="left">Podcasting for Beginners</span>
+    <span class="right">Why Start a Podcast</span>
+  </div>
+  <div style="padding: 10mm 12mm 0 12mm;">
+    <div class="section-header">
+      <span class="section-num">Chapter 02</span>
+      <h2 class="section-title">Why Start a Podcast?</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="lead">Podcasting has exploded in popularity over the past decade, and for good reason. It's one of the most intimate and effective ways to connect with an audience.</p>
+
+    <h3>The Power of Audio</h3>
+    <p>Unlike video or written content, podcasts fit naturally into people's daily routines. Listeners tune in during commutes, workouts, housework, or quiet moments before bed. This consistent presence builds deep connections over time.</p>
+
+    <p>Audio also allows for a level of depth that's hard to achieve elsewhere. When someone listens to a 45-minute conversation, they're giving you their full attention in a way that rarely happens with other media formats.</p>
+
+    <h3>Key Benefits of Podcasting</h3>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-icon">1</div>
+        <div class="card-title">Build Authority</div>
+        <p>Sharing your knowledge regularly establishes you as an expert in your field and builds trust with your audience.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">2</div>
+        <div class="card-title">Reach New Audiences</div>
+        <p>Podcasts reach people who might not discover you through blog posts, social media, or videos. It's an entirely different channel.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">3</div>
+        <div class="card-title">Deep Connections</div>
+        <p>The voice in your ear creates a sense of familiarity and friendship that builds lasting audience relationships.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">4</div>
+        <div class="card-title">Multiple Revenue Streams</div>
+        <p>Sponsorships, affiliate marketing, premium content, and listener support provide various monetization paths.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Did You Know?</div>
+      <p>There are over 4 million podcasts with over 60 million episodes as of 2025. Yet only about 35% of podcasts have 3 or fewer episodes. Starting and staying consistent puts you ahead of most.</p>
+    </div>
+
+    <h3>Who Should Start a Podcast?</h3>
+    <ul>
+      <li><strong>Experts and consultants</strong> who want to share knowledge and attract clients</li>
+      <li><strong>Entrepreneurs and business owners</strong> building brand awareness and authority</li>
+      <li><strong>Creators and artists</strong> wanting to share their journey and build community</li>
+      <li><strong>Educators and trainers</strong> reaching learners in a new format</li>
+      <li><strong>Anyone with a story to tell</strong> or message to share</li>
+    </ul>
+  </div>
+  <div class="running-footer">4</div>
+</section>
+
+<!-- Chapter 3: Finding Your Podcast Concept -->
+<section class="page" id="concept">
+  <div class="running-header">
+    <span class="left">Podcasting for Beginners</span>
+    <span class="right">Finding Your Concept</span>
+  </div>
+  <div style="padding: 10mm 12mm 0 12mm;">
+    <div class="section-header">
+      <span class="section-num">Chapter 03</span>
+      <h2 class="section-title">Finding Your Podcast Concept</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="lead">Before buying any equipment, you need to define what your podcast will be about. The best podcasts solve a specific problem, serve a particular audience, or fill a gap in the market.</p>
+
+    <h3>The Three Pillars of Your Podcast</h3>
+
+    <h4>1. Topic or Theme</h4>
+    <p>What will your podcast be about? This should be something you're genuinely passionate about and have expertise or experience in. Avoid trying to appeal to everyone. Niche down to a specific angle that makes you unique.</p>
+
+    <div class="callout">
+      <div class="callout-title">Example</div>
+      <p>Instead of "business podcast," consider "podcast for first-generation entrepreneurs building service businesses." The more specific, the better.</p>
+    </div>
+
+    <h4>2. Target Audience</h4>
+    <p>Who are you creating this podcast for? Create a detailed picture of your ideal listener. What are their challenges? What do they want to learn? Where do they spend their time? Understanding your audience shapes every decision.</p>
+
+    <h4>3. Format and Structure</h4>
+    <p>How will your podcast be delivered? Common formats include:</p>
+    <ul>
+      <li><strong>Interview style:</strong> You interview guests, bringing diverse perspectives to your topic</li>
+      <li><strong>Solo show:</strong> You share your own insights, stories, and expertise directly</li>
+      <li><strong>Co-host conversation:</strong> Two or more hosts discuss topics together</li>
+      <li><strong>Storytelling/narrative:</strong> A structured narrative format with episodes telling complete stories</li>
+      <li><strong>Hybrid:</strong> Combines elements from multiple formats</li>
+    </ul>
+
+    <h3>Naming Your Podcast</h3>
+    <p>Your podcast name should be memorable, searchable, and indicative of your content. It should also be available as a domain and social media handles. Spend time brainstorming and testing options before committing.</p>
+
+    <div class="checklist">
+      <div class="checklist-title">Concept Validation Checklist</div>
+      <ul>
+        <li><span class="checkbox"></span> Can you clearly describe your podcast in one sentence?</li>
+        <li><span class="checkbox"></span> Is there a specific audience who would want this content?</li>
+        <li><span class="checkbox"></span> Are you genuinely interested in this topic for the long term?</li>
+        <li><span class="checkbox"></span> Does your concept differentiate you from existing podcasts?</li>
+        <li><span class="checkbox"></span> Can you envision creating 100 episodes on this topic?</li>
+      </ul>
+    </div>
+  </div>
+  <div class="running-footer">5</div>
+</section>
+
+<!-- Chapter 4: Equipment -->
+<section class="page" id="equipment">
+  <div class="running-header">
+    <span class="left">Podcasting for Beginners</span>
+    <span class="right">Essential Equipment</span>
+  </div>
+  <div style="padding: 10mm 12mm 0 12mm;">
+    <div class="section-header">
+      <span class="section-num">Chapter 04</span>
+      <h2 class="section-title">Essential Equipment</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="lead">You don't need expensive gear to start, but quality equipment does matter. Here's what you need and what you can skip.</p>
+
+    <h3>The Microphone: Your Most Important Investment</h3>
+    <p>Your microphone is the single most important piece of equipment. Good audio can make up for other limitations; bad audio cannot be fixed in post-production.</p>
+
+    <h4>Recommended USB Microphones (Beginner)</h4>
+    <ul>
+      <li><strong>Rode NT-USB+</strong> - Excellent sound quality, plug-and-play simplicity, around $179</li>
+      <li><strong>Blue Yeti</strong> - Popular choice with multiple pickup patterns, around $129</li>
+      <li><strong>Audio-Technica ATR2100x</strong> - Budget-friendly with XLR option for future upgrades, around $79</li>
+      <li><strong>Samson Q2U</strong> - Another budget option with solid quality, around $69</li>
+    </ul>
+
+    <h4>XLR Microphones (Intermediate)</h4>
+    <p>If you plan to grow and want better audio quality, XLR microphones connected to an audio interface offer superior results. Popular options include the Shure SM7B (industry standard), Rode PodMic, and Audio-Technica AT2020.</p>
+
+    <h3>Audio Interface</h3>
+    <p>If you choose an XLR microphone, you'll need an audio interface to convert the analog signal to digital. The Focusrite Scarlett 2i2 is the most popular beginner option, offering clean preamps and two inputs for around $169.</p>
+
+    <div class="callout">
+      <div class="callout-title">Pro Tip</div>
+      <p>Start with a quality USB microphone. You can always upgrade to XLR later. Don't let equipment paralysis stop you from starting.</p>
+    </div>
+
+    <h3>Headphones</h3>
+    <p>You need closed-back headphones to monitor your recording without audio bleeding into your microphone. Avoid wireless options early on as they can introduce latency and connectivity issues. The Audio-Technica ATH-M20x (around $49) is an excellent budget choice.</p>
+
+    <h3>Other Essentials</h3>
+    <ul>
+      <li><strong>Pop filter:</strong> Reduces plosive sounds (p, b, t). Many mics include these.</li>
+      <li><strong>Boom arm or mic stand:</strong> Keeps your hands free and positions the mic consistently.</li>
+      <li><strong>Cable management:</strong> Organize cables to avoid tangles and interference.</li>
+    </ul>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">Starter Budget</div>
+        <div class="price">$75-150</div>
+        <div class="price-includes">Everything you need to start</div>
+        <ul class="price-features">
+          <li><span class="check-icon">+</span> USB Condenser Mic</li>
+          <li><span class="check-icon">+</span> Basic Headphones</li>
+          <li><span class="check-icon">+</span> Desk Stand</li>
+          <li><span class="check-icon">+</span> Pop Filter</li>
+        </ul>
+      </div>
+      <div class="price-card featured">
+        <div class="price-tier">Recommended</div>
+        <div class="price">$250-400</div>
+        <div class="price-includes">Professional quality setup</div>
+        <ul class="price-features">
+          <li><span class="check-icon">+</span> XLR Microphone</li>
+          <li><span class="check-icon">+</span> Audio Interface</li>
+          <li><span class="check-icon">+</span> Studio Headphones</li>
+          <li><span class="check-icon">+</span> Boom Arm</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="running-footer">7</div>
+</section>
+
+<!-- Chapter 5: Recording Setup -->
+<section class="page" id="setup">
+  <div class="running-header">
+    <span class="left">Podcasting for Beginners</span>
+    <span class="right">Recording Setup</span>
+  </div>
+  <div style="padding: 10mm 12mm 0 12mm;">
+    <div class="section-header">
+      <span class="section-num">Chapter 05</span>
+      <h2 class="section-title">Recording Setup & Environment</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="lead">The best microphone in the world won't help if you're recording in a noisy, echo-filled room. Your environment matters as much as your equipment.</p>
+
+    <h3>Choosing Your Recording Space</h3>
+    <p>Look for a small, enclosed room with soft furnishings that absorb sound. Large empty rooms with hard surfaces create echoes that are very difficult to fix. Closets filled with clothes make surprisingly good recording spaces due to the soft, sound-absorbing fabrics.</p>
+
+    <h3>Controlling Background Noise</h3>
+    <ul>
+      <li>Turn off HVAC systems, fans, and air purifiers during recording</li>
+      <li>Close windows and doors to block external sounds</li>
+      <li>Silence your phone and disable notifications</li>
+      <li>Use a blanket over yourself and your microphone for a quick vocal booth</li>
+      <li>Record when your home or office is quietest</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-title">Before You Record</div>
+      <p>Do a test recording in your space. Listen with headphones and pay attention to any hums, buzzes, echoes, or background noise. Address what you can before committing to a recording location.</p>
+    </div>
+
+    <h3>Acoustic Treatment (Optional but Helpful)</h3>
+    <p>Basic acoustic treatment can dramatically improve your sound quality. You don't need to build a professional studio, but strategic placement of soft materials helps:</p>
+    <ul>
+      <li><strong>Reflection filters:</strong> Place behind your microphone to reduce echo</li>
+      <li><strong>Foam panels:</strong> Attach to walls behind your recording position</li>
+      <li><strong>Moving blankets:</strong> Drape over hard surfaces or create a vocal booth</li>
+      <li><strong>Carpets and rugs:</strong> Hard floors create reflections; soft floor coverings help</li>
+    </ul>
+
+    <h3>Software Setup</h3>
+    <p>You'll need digital audio workstation (DAW) software to record. Free options include Audacity (Windows/Mac/Linux), GarageBand (Mac/iOS), and Adobe Audition (free trial). Set your input level so your voice peaks around -12dB to -6dB, leaving headroom for louder moments.</p>
+
+    <div class="checklist">
+      <div class="checklist-title">Setup Checklist</div>
+      <ul>
+        <li><span class="checkbox"></span> Choose and prepare your recording space</li>
+        <li><span class="checkbox"></span> Position microphone 6-12 inches from mouth</li>
+        <li><span class="checkbox"></span> Put on headphones to monitor your recording</li>
+        <li><span class="checkbox"></span> Set input levels correctly (not too loud, not too quiet)</li>
+        <li><span class="checkbox"></span> Do a test recording and review it</li>
+        <li><span class="checkbox"></span> Enable noise reduction/gate if your software has it</li>
+      </ul>
+    </div>
+  </div>
+  <div class="running-footer">9</div>
+</section>
+
+<!-- Chapter 6: Recording Techniques -->
+<section class="page" id="recording">
+  <div class="running-header">
+    <span class="left">Podcasting for Beginners</span>
+    <span class="right">Recording Techniques</span>
+  </div>
+  <div style="padding: 10mm 12mm 0 12mm;">
+    <div class="section-header">
+      <span class="section-num">Chapter 06</span>
+      <h2 class="section-title">Recording Techniques</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="lead">Great audio isn't just about equipment—it's about technique. How you speak, position yourself, and manage your environment all impact the final result.</p>
+
+    <h3>Microphone Technique</h3>
+    <ul>
+      <li><strong>Distance:</strong> Keep the mic 6-12 inches from your mouth. Too close causes proximity effect (muffled bass); too far picks up room noise.</li>
+      <li><strong>Angle:</strong> Speak slightly past the microphone, not directly into it. This reduces plosives (hard p and b sounds).</li>
+      <li><strong>Consistency:</strong> Maintain the same distance and angle throughout recording. If you move, the audio changes.</li>
+    </ul>
+
+    <h3>Voice Delivery</h3>
+    <p>Your voice is your instrument. Treat it well:</p>
+    <ul>
+      <li><strong>Hydrate:</strong> Drink water before and during recording. Avoid dairy and caffeine which create mucus.</li>
+      <li><strong>Warm up:</strong> Do vocal exercises before recording—scales, tongue twisters, humming.</li>
+      <li><strong>Project energy:</strong> Even when alone, speak with the energy you'd use talking to a room of people. Flat delivery makes listeners tune out.</li>
+      <li><strong>Smile:</strong> It changes the tone of your voice, even on solo recordings.</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-title">Common Mistake</div>
+      <p>Many beginners speak too quietly or too monotonously. Pretend you're excited to tell a friend about something fascinating. That enthusiasm should come through in your recording.</p>
+    </div>
+
+    <h3>Remote Interviews</h3>
+    <p>If you're interviewing guests remotely, use video conferencing for the conversation but record locally on each end. Use Zoom, Riverside, or SquadCast—these services record each participant separately in high quality.</p>
+
+    <h3>Recording Best Practices</h3>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Do</div>
+        <p>+ Record in short segments (5-10 min) to avoid fatigue<br>+ Take breaks between segments<br>+ Save frequently during long recordings<br>+ Leave 2-3 seconds of silence at the start<br>+ Mark mistakes verbally (e.g., "we'll redo that") so they're easy to find and remove</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Don't</div>
+        <p>- Ramble without direction (use an outline)<br>- Rush through content<br>- Chew gum or eat while recording<br>- Have the mic touching any surface<br>- Record with background music playing</p>
+      </div>
+    </div>
+  </div>
+  <div class="running-footer">11</div>
+</section>
+
+<!-- Chapter 7: Editing Fundamentals -->
+<section class="page" id="editing">
+  <div class="running-header">
+    <span class="left">Podcasting for Beginners</span>
+    <span class="right">Editing Fundamentals</span>
+  </div>
+  <div style="padding: 10mm 12mm 0 12mm;">
+    <div class="section-header">
+      <span class="section-num">Chapter 07</span>
+      <h2 class="section-title">Editing Fundamentals</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="lead">Editing is where good recordings become great podcasts. It removes mistakes, tightens pacing, and polishes your final product.</p>
+
+    <h3>Essential Editing Tasks</h3>
+    <ul>
+      <li><strong>Remove mistakes:</strong> Cut long pauses, stumble words, and any mistakes your marked during recording.</li>
+      <li><strong>Reduce noise:</strong> Apply noise reduction to remove hums, buzzes, or background sounds.</li>
+      <li><strong>Adjust levels:</strong> Ensure consistent volume throughout. Normalize to -16dB LUFS for consistency.</li>
+      <li><strong>Add music:</strong> Layer intro/outro music and any transitional music beds.</li>
+      <li><strong>Create timing:</strong> Add pauses for effect and maintain a good pace.</li>
+    </ul>
+
+    <h3>Editing Workflow</h3>
+    <ol>
+      <li><strong>Import:</strong> Bring your raw recording(s) into your DAW</li>
+      <li><strong>Listen through:</strong> Take notes on what to keep, remove, and adjust</li>
+      <li><strong>First cut:</strong> Remove major mistakes and unnecessary content</li>
+      <li><strong>Smooth:</strong> Clean up transitions and fix any audio issues</li>
+      <li><strong>Enhance:</strong> Apply noise reduction, compression, and EQ</li>
+      <li><strong>Add elements:</strong> Insert music, intros, outros, and any other audio</li>
+      <li><strong>Export:</strong> Render at 128kbps MP3 or higher (192kbps AAC recommended)</li>
+    </ol>
+
+    <div class="callout">
+      <div class="callout-title">Time Estimate</div>
+      <p>A beginner editor typically spends 2-4 hours editing a one-hour episode. This decreases with practice. After 10-20 episodes, you might cut this to 1-2 hours per hour of content.</p>
+    </div>
+
+    <h3>Common Mistakes to Avoid</h3>
+    <ul>
+      <li>Over-editing: Removing all imperfections makes it sound artificial. A natural feel is good.</li>
+      <li>Bad crossfades: Always smooth your cuts with crossfades to avoid clicks and pops.</li>
+      <li>Inconsistent levels: Check your loudness across the entire episode.</li>
+      <li>Clipping audio: If your recording peaks at 0dB, it's distorted. Reduce input levels.</li>
+    </ul>
+
+    <div class="key-takeaway">
+      <div class="key-takeaway-title">Key Takeaway</div>
+      <p>Edit for your listener. Every cut should make the content clearer or more engaging. If you're unsure whether to cut something, err toward leaving it in.</p>
+    </div>
+  </div>
+  <div class="running-footer">13</div>
+</section>
+
+<!-- Chapter 8: Publishing & Distribution -->
+<section class="page" id="publishing">
+  <div class="running-header">
+    <span class="left">Podcasting for Beginners</span>
+    <span class="right">Publishing & Distribution</span>
+  </div>
+  <div style="padding: 10mm 12mm 0 12mm;">
+    <div class="section-header">
+      <span class="section-num">Chapter 08</span>
+      <h2 class="section-title">Publishing & Distribution</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="lead">Getting your podcast into the ears of listeners means understanding how podcast distribution works and listing your show on major platforms.</p>
+
+    <h3>Understanding RSS Feeds</h3>
+    <p>Podcasting uses RSS (Really Simple Syndication) to distribute episodes. Your RSS feed is a unique URL that contains information about your show and all your episodes. This feed is what podcast apps use to check for new episodes.</p>
+
+    <h3>Hosting Services</h3>
+    <p>You need a podcast hosting service to store your audio files and generate your RSS feed. Popular options include:</p>
+    <ul>
+      <li><strong>Transistor</strong> ($19/month) - Unlimited podcasts, simple interface</li>
+      <li><strong>Buzzsprout</strong> ($12/month starter) - Easy to use, good analytics</li>
+      <li><strong>Captivate</strong> (~$19/month) - Growth-focused features</li>
+      <li><strong>Podbean</strong> (~$9/month starter) - Budget-friendly option</li>
+      <li><strong>Riverside</strong> - Recording and hosting combined</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-title">Important</div>
+      <p>Never host your podcast on a free file-sharing service like Dropbox or Google Drive. Use a dedicated podcast host—they provide reliable delivery, analytics, and proper RSS distribution.</p>
+    </div>
+
+    <h3>Submitting to Directories</h3>
+    <p>Once you have a hosting service, submit your RSS feed to these major directories:</p>
+    <ol>
+      <li><strong>Apple Podcasts:</strong> The largest platform. Requires Apple ID, but free to submit.</li>
+      <li><strong>Spotify:</strong> Huge audience. Submit through Spotify for Podcasters.</li>
+      <li><strong>Google Podcasts / YouTube Music:</strong> Google's podcast platform</li>
+      <li><strong>Amazon Music / Audible:</strong> Growing podcast presence</li>
+      <li><strong>Stitcher, TuneIn, Pocket Casts:</strong> Additional platforms for reach</li>
+    </ol>
+
+    <h3>Artwork and Metadata</h3>
+    <p>Your podcast cover art must be 1400x1400 pixels minimum, in JPEG or PNG format. It should be simple, readable at small sizes, and clearly communicate your podcast's topic. The title and artwork are often the first impression potential listeners get.</p>
+  </div>
+  <div class="running-footer">15</div>
+</section>
+
+<!-- Chapter 9: Growing Your Audience -->
+<section class="page" id="growth">
+  <div class="running-header">
+    <span class="left">Podcasting for Beginners</span>
+    <span class="right">Growing Your Audience</span>
+  </div>
+  <div style="padding: 10mm 12mm 0 12mm;">
+    <div class="section-header">
+      <span class="section-num">Chapter 09</span>
+      <h2 class="section-title">Growing Your Audience</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="lead">Building an audience takes time, consistency, and strategic effort. Here are proven approaches to grow your listener base.</p>
+
+    <h3>Content Quality and Consistency</h3>
+    <p>The foundation of growth is consistently publishing quality content. Set a schedule you can maintain—weekly, biweekly, or monthly—and stick to it. Your audience should know when to expect new episodes.</p>
+
+    <h3>Promotion Strategies</h3>
+    <ul>
+      <li><strong>Guest appearances:</strong> Appear on other podcasts in your niche to introduce yourself to their audiences.</li>
+      <li><strong>Cross-promotion:</strong> Partner with other podcasters to promote each other's shows.</li>
+      <li><strong>Show notes:</strong> Create detailed show notes with timestamps and links—great for SEO.</li>
+      <li><strong>Video clips:</strong> Create short video clips from your episodes for social media.</li>
+      <li><strong>Transcriptions:</strong> Make episodes searchable by providing transcripts.</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-title">Focus on Retention</div>
+      <p>It's easier to keep existing listeners than acquire new ones. Focus on creating content that keeps people coming back before obsessing about new downloads.</p>
+    </div>
+
+    <h3>Social Media and Community</h3>
+    <p>Build presence on the platforms where your audience spends time. Share clips, behind-the-scenes content, and engage in conversations. Create a community around your show—Facebook groups, Discord servers, or similar spaces where listeners can connect.</p>
+
+    <h3>Analytics and Iteration</h3>
+    <p>Your podcast host provides download data. Pay attention to which episodes perform best and why. Learn from your analytics to understand what content resonates and adapt your strategy accordingly.</p>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Growth Timeline</div>
+        <p>Month 1-3: Build foundation<br>Month 4-6: Establish routine<br>Month 7-12: Refine and optimize<br>Year 2+: Scale and monetize</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Realistic Expectations</div>
+        <p>First 100 listeners: 3-6 months<br>First 1,000: 12-18 months<br>First 10,000: 2-3 years<br>Results vary by niche and effort</p>
+      </div>
+    </div>
+  </div>
+  <div class="running-footer">17</div>
+</section>
+
+<!-- Chapter 10: Monetization -->
+<section class="page" id="monetization">
+  <div class="running-header">
+    <span class="left">Podcasting for Beginners</span>
+    <span class="right">Monetization</span>
+  </div>
+  <div style="padding: 10mm 12mm 0 12mm;">
+    <div class="section-header">
+      <span class="section-num">Chapter 10</span>
+      <h2 class="section-title">Monetization Basics</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="lead">While most podcasts don't make millions, there are legitimate ways to generate revenue from your show as it grows.</p>
+
+    <h3>Common Monetization Methods</h3>
+
+    <h4>Sponsorships</h4>
+    <p>The most common revenue source. Companies pay to have their products or services mentioned in your episodes. Rates typically range from $15-50 per 1,000 downloads. You'll need 500-1,000+ downloads per episode to attract sponsors.</p>
+
+    <h4>Affiliate Marketing</h4>
+    <p>Promote products and earn a commission on sales. Use unique affiliate links in your show notes. Amazon's Associates program is an easy starting point for many niches.</p>
+
+    <h4>Premium Content</h4>
+    <p>Create a paid tier with bonus episodes, ad-free content, early access, or exclusive material. Platforms like Apple Podcasts Subscriptions and Patreon make this straightforward.</p>
+
+    <h4>Listener Support</h4>
+    <p>Direct support through platforms like Patreon, Ko-fi, or Buy Me a Coffee. Offer tiers with different support levels and corresponding perks.</p>
+
+    <div class="callout">
+      <div class="callout-title">Don't Rush</div>
+      <p>Focus on building your audience before monetizing. Trying to make money from a podcast with 50 downloads rarely works and can push listeners away. Build first, monetize second.</p>
+    </div>
+
+    <h3>Revenue Timeline</h3>
+    <ul>
+      <li><strong>Month 1-12:</strong> Focus on content and audience building. No monetization needed.</li>
+      <li><strong>Year 1-2:</strong> Small affiliate revenue possible. Consider listener support.</li>
+      <li><strong>Year 2+:</strong> Sponsorship opportunities emerge. Diversify income streams.</li>
+    </ul>
+
+    <div class="key-takeaway">
+      <div class="key-takeaway-title">Key Takeaway</div>
+      <p>Monetization is a long-term game. Focus on creating valuable content that people want to listen to. Revenue will follow as your audience grows.</p>
+    </div>
+  </div>
+  <div class="running-footer">19</div>
+</section>
+
+<!-- Chapter 11: Launch Checklist -->
+<section class="page" id="checklist">
+  <div class="running-header">
+    <span class="left">Podcasting for Beginners</span>
+    <span class="right">Launch Checklist</span>
+  </div>
+  <div style="padding: 10mm 12mm 0 12mm;">
+    <div class="section-header">
+      <span class="section-num">Chapter 11</span>
+      <h2 class="section-title">Launch Checklist</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="lead">Use this comprehensive checklist to ensure you have everything in place before publishing your first episode.</p>
+
+    <div class="checklist">
+      <div class="checklist-title">Podcast Foundation</div>
+      <ul>
+        <li><span class="checkbox"></span> Define your podcast concept and target audience</li>
+        <li><span class="checkbox"></span> Choose your podcast name (check availability)</li>
+        <li><span class="checkbox"></span> Write your show description</li>
+        <li><span class="checkbox"></span> Select your podcast format (solo, interview, etc.)</li>
+        <li><span class="checkbox"></span> Plan your content calendar/schedule</li>
+      </ul>
+    </div>
+
+    <div class="checklist">
+      <div class="checklist-title">Equipment & Setup</div>
+      <ul>
+        <li><span class="checkbox"></span> Acquire microphone and headphones</li>
+        <li><span class="checkbox"></span> Set up audio interface if using XLR</li>
+        <li><span class="checkbox"></span> Choose and install recording software</li>
+        <li><span class="checkbox"></span> Prepare your recording space</li>
+        <li><span class="checkbox"></span> Test audio quality and levels</li>
+      </ul>
+    </div>
+
+    <div class="checklist">
+      <div class="checklist-title">Production</div>
+      <ul>
+        <li><span class="checkbox"></span> Write outline for first episode</li>
+        <li><span class="checkbox"></span> Record intro music or source royalty-free music</li>
+        <li><span class="checkbox"></span> Record your first episode</li>
+        <li><span class="checkbox"></span> Edit and export your episode</li>
+        <li><span class="checkbox"></span> Add chapter markers (optional)</li>
+      </ul>
+    </div>
+
+    <div class="checklist">
+      <div class="checklist-title">Distribution</div>
+      <ul>
+        <li><span class="checkbox"></span> Create podcast cover art (1400x1400px)</li>
+        <li><span class="checkbox"></span> Sign up for podcast hosting service</li>
+        <li><span class="checkbox"></span> Upload first episode and add metadata</li>
+        <li><span class="checkbox"></span> Submit RSS feed to Apple Podcasts</li>
+        <li><span class="checkbox"></span> Submit to Spotify and other directories</li>
+        <li><span class="checkbox"></span> Verify your podcast appears in search</li>
+      </ul>
+    </div>
+
+    <div class="checklist">
+      <div class="checklist-title">Launch Day</div>
+      <ul>
+        <li><span class="checkbox"></span> Promote on social media</li>
+        <li><span class="checkbox"></span> Tell friends and colleagues</li>
+        <li><span class="checkbox"></span> Submit to podcast directories (Listen Notes, etc.)</li>
+        <li><span class="checkbox"></span> Ask early listeners to leave reviews</li>
+        <li><span class="checkbox"></span> Plan content for week two</li>
+      </ul>
+    </div>
+  </div>
+  <div class="running-footer">20</div>
+</section>
+
+<!-- Chapter 12: Resources -->
+<section class="page" id="resources">
+  <div class="running-header">
+    <span class="left">Podcasting for Beginners</span>
+    <span class="right">Resources</span>
+  </div>
+  <div style="padding: 10mm 12mm 0 12mm;">
+    <div class="section-header">
+      <span class="section-num">Chapter 12</span>
+      <h2 class="section-title">Resources & Next Steps</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="lead">Here's a curated list of resources to help you on your podcasting journey.</p>
+
+    <h3>Recommended Tools</h3>
+
+    <div class="resource-list">
+      <div class="resource-item">
+        <div class="resource-num">1</div>
+        <div class="resource-content">
+          <h4>Audacity (Free)</h4>
+          <p>Open-source audio editing software. Excellent for beginners learning editing. audacityteam.org</p>
+        </div>
+      </div>
+      <div class="resource-item">
+        <div class="resource-num">2</div>
+        <div class="resource-content">
+          <h4>Riverside.fm</h4>
+          <p>Remote recording platform with separate track recording and video capabilities. riverside.fm</p>
+        </div>
+      </div>
+      <div class="resource-item">
+        <div class="resource-num">3</div>
+        <div class="resource-content">
+          <h4>Transistor Podcast Hosting</h4>
+          <p>Reliable hosting with unlimited shows and team collaboration features. transistor.fm</p>
+        </div>
+      </div>
+      <div class="resource-item">
+        <div class="resource-num">4</div>
+        <div class="resource-content">
+          <h4>Buzzsprout</h4>
+          <p>Easy-to-use hosting with automatic optimization and promotional tools. buzzsprout.com</p>
+        </div>
+      </div>
+      <div class="resource-item">
+        <div class="resource-num">5</div>
+        <div class="resource-content">
+          <h4>Anchor (Free)</h4>
+          <p>Free podcast hosting by Spotify. Good starting point but limited features. anchor.fm</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Learning Resources</h3>
+    <ul>
+      <li><strong>Podcasters' Facebook Groups:</strong> Search for podcasting communities to connect with other creators</li>
+      <li><strong>The Podcast Host:</strong> Blog and courses at thepodcasthost.com</li>
+      <li><strong>Buzzsprout University:</strong> Free video tutorials on all aspects of podcasting</li>
+      <li><strong>r/podcasting:</strong> Reddit community for podcasters</li>
+    </ul>
+
+    <h3>Music and Sound</h3>
+    <ul>
+      <li><strong>Epidemic Sound:</strong> Royalty-free music for podcast intros/outros</li>
+      <li><strong>Artlist:</strong> Unlimited licensing for podcast music</li>
+      <li><strong>Freesound:</strong> Creative commons sound effects and audio</li>
+    </ul>
+
+    <div class="final-cta">
+      <h2>Ready to Launch?</h2>
+      <p>You have everything you need to start your podcast. Don't overthink it—just start. Your first episode doesn't need to be perfect. It needs to exist.</p>
+      <div class="cta-button">Begin Your Journey Today</div>
+    </div>
+  </div>
+  <div class="running-footer">22</div>
+</section>
+
+</body>
+</html>
